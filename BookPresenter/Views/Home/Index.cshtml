@@ -11,7 +11,20 @@
 <table class="table">
     <thead>
         <tr>
-
+            <th>name</th>
+             <th>author</th>
+            <th>publish date</th>
         </tr>
     </thead>
+   <tbody>
+        @foreach(var book in Model)
+        {
+            <tr>
+                <td>@book.Name</td>
+                <td>@book.Author</td>
+                <td>@book.PublishDate</td>
+            </tr>
+        }
+
+   </tbody>
 </table>

@@ -7,7 +7,8 @@ namespace BookPresenter.Controllers
 
     public class HomeController : Controller
     {
-        public List<BookViewModel> books = new List<BookViewModel>();
+        public static List<BookViewModel> books = new List<BookViewModel>();
+
         private readonly ILogger<HomeController> _logger;
 
         public HomeController(ILogger<HomeController> logger)
@@ -17,7 +18,7 @@ namespace BookPresenter.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(books);
         }
 
         public IActionResult Privacy()
@@ -31,6 +32,7 @@ namespace BookPresenter.Controllers
         [HttpPost]
         public IActionResult Create(BookViewModel book)
         {
+            book.Id = books.Count > 0 ? books.Max(b => b.Id) + 1 : 1;
             books.Add(book);
             return RedirectToAction("Index");
         }
